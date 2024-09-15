@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap + ECharts 响应式布局示例</title>
+    <!-- 引入Bootstrap CSS -->
+    <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
+    <!-- 新 Bootstrap5 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.staticfile.net/twitter-bootstrap/5.1.1/css/bootstrap.min.css">
+
+    <!-- 引入ECharts -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+    <!-- 行1：柱状图、扇形图1、扇形图2 -->
+    <div class="row">
+        <div class="col-xl-6 col-lg-12 col-12">
+            <div id="barChart" style="height: 400px;"></div>
+        </div>
+        <div class="col-xl-2 col-lg-6 col-6">
+            <div id="pieChart1" style="height: 400px;"></div>
+        </div>
+        <div class="col-xl-2 col-lg-6 col-6">
+            <div id="pieChart2" style="height: 400px;"></div>
+        </div>
+    </div>
+
+    <!-- 行2：折线图 -->
+    <div class="row">
+        <div class="col-12">
+            <div id="lineChart" style="height: 400px;"></div>
+        </div>
+    </div>
+
+    <!-- 行3：饼图1、饼图2、饼图3 -->
+    <div class="row">
+        <div class="col-xl-4 col-lg-6 col-12">
+            <div id="pieChart3" style="height: 400px;"></div>
+        </div>
+        <div class="col-xl-4 col-lg-6 col-12">
+            <div id="pieChart4" style="height: 400px;"></div>
+        </div>
+        <div class="col-xl-4 col-lg-6 col-12">
+            <div id="pieChart5" style="height: 400px;"></div>
+        </div>
+    </div>
+</div>
+
+<!-- 引入Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>-->
+<!--  popper.min.js 用于弹窗、提示、下拉菜单 -->
+<script src="https://cdn.staticfile.net/popper.js/2.9.3/umd/popper.min.js"></script>
+<!-- 最新的 Bootstrap5 核心 JavaScript 文件 -->
+<script src="https://cdn.staticfile.net/twitter-bootstrap/5.1.1/js/bootstrap.min.js"></script>
+<!-- ECharts 响应式布局脚本 -->1
+<script>
+    // 初始化图表
+    var barChart = echarts.init(document.getElementById('barChart'));
+    var pieChart1 = echarts.init(document.getElementById('pieChart1'));
+    var pieChart2 = echarts.init(document.getElementById('pieChart2'));
+    var lineChart = echarts.init(document.getElementById('lineChart'));
+    var pieChart3 = echarts.init(document.getElementById('pieChart3'));
+    var pieChart4 = echarts.init(document.getElementById('pieChart4'));
+    var pieChart5 = echarts.init(document.getElementById('pieChart5'));
+
+    // 指定图表的配置项和数据
+    var optionBar = {
+        title: {
+            text: '柱状图示例'
+        },
+        tooltip: {},
+        xAxis: {
+            data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+        },
+        yAxis: {},
+        series: [{
+            name: '销量',
+            type: 'bar',
+            data: [5, 20, 36, 10, 10, 20]
+        }]
+    };
+
+    var optionPie1 = {
+        title: {
+            text: '扇形图1示例'
+        },
+        series: [
+            {
+                name: '访问来源',
+                type: 'pie',
+                radius: '55%',
+                data: [
+                    {value: 235, name: '视频广告'},
+                    {value: 274, name: '联盟广告'},
+                    {value: 310, name: '邮件营销'},
+                    {value: 335, name: '直接访问'},
+                    {value: 400, name: '搜索引擎'}
+                ]
+            }
+        ]
+    };
+
+    var optionPie2 = {
+        title: {
+            text: '扇形图2示例'
+        },
+        series: [
+            {
+                name: '访问来源',
+                type: 'pie',
+                radius: '55%',
+                data: [
+                    {value: 1048, name: '搜索引擎'},
+                    {value: 735, name: '直接访问'},
+                    {value: 580, name: '邮件营销'},
+                    {value: 484, name: '联盟广告'},
+                    {value: 300, name: '视频广告'}
+                ]
+            }
+        ]
+    };
+
+    var optionLine = {
+        title: {
+            text: '折线图示例'
+        },
+        tooltip: {},
+        xAxis: {
+            data: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
+        },
+        yAxis: {},
+        series: [{
+            name: '销量',
+            type: 'line',
+            data: [120, 132, 101, 134, 90, 230, 210]
+        }]
+    };
+
+    var optionPie3 = {
+        title: {
+            text: '饼图1示例'
+        },
+        series: [
+            {
+                name: '访问来源',
+                type: 'pie',
+                radius: '55%',
+                data: [
+                    {value: 335, name: '直接访问'},
+                    {value: 310, name: '邮件营销'},
+                    {value: 274, name: '联盟广告'},
+                    {value: 235, name: '视频广告'}
+                ]
+            }
+        ]
+    };
+
+    var optionPie4 = {
+        title: {
+            text: '饼图2示例'
+        },
+        series: [
+            {
+                name: '访问来源',
+                type: 'pie',
+                radius: '55%',
+                data: [
+                    {value: 310, name: '直接访问'},
+                    {value: 335, name: '邮件营销'},
+                    {value: 235, name: '联盟广告'},
+                    {value: 274, name: '视频广告'}
+                ]
+            }
+        ]
+    };
+
+    var optionPie5 = {
+        title: {
+            text: '饼图3示例'
+        },
+        series: [
+            {
+                name: '访问来源',
+                type: 'pie',
+                radius: '55%',
+                data: [
+                    {value: 274, name: '直接访问'},
+                    {value: 310, name: '邮件营销'},
+                    {value: 235, name: '联盟广告'},
+                    {value: 335, name: '视频广告'}
+                ]
+            }
+        ]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    barChart.setOption(optionBar);
+    pieChart1.setOption(optionPie1);
+    pieChart2.setOption(optionPie2);
+    lineChart.setOption(optionLine);
+    pieChart3.setOption(optionPie3);
+    pieChart4.setOption(optionPie4);
+    pieChart5.setOption(optionPie5);
+
+    // 确保图表响应式调整
+    window.onresize = function () {
+        barChart.resize();
+        pieChart1.resize();
+        pieChart2.resize();
+        lineChart.resize();
+        pieChart3.resize();
+        pieChart4.resize();
+        pieChart5.resize();
+    }
+</script>
+</body>
+</html>
